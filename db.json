@@ -1,0 +1,44 @@
+{
+  "products": [
+    {
+      "id": 1,
+      "name": "Computer",
+      "price": 4500,
+      "quantity": 100,
+      "selected": true,
+      "available": true
+    },
+    {
+      "id": 2,
+      "name": "calvier",
+      "price": 50,
+      "quantity": 300,
+      "selected": true,
+      "available": true
+    },
+    {
+      "id": 3,
+      "name": "souris",
+      "price": 10,
+      "quantity": 30,
+      "selected": false,
+      "available": true
+    },
+    {
+      "id": 4,
+      "name": "ecran",
+      "price": 500,
+      "quantity": 364,
+      "selected": true,
+      "available": true
+    },
+    {
+      "id": 5,
+      "name": "chargeur",
+      "price": 10,
+      "quantity": 2,
+      "selected": false,
+      "available": false
+    }
+  ]
+}
