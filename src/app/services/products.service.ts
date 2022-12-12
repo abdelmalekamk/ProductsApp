@@ -38,4 +38,9 @@ export class ProductsService{
     let host= environment.apiUrl;
     return this.http.delete<void>(host+"/products/"+product.id);
   }
+
+  save (product:Product):Observable<Product>{
+    let host= environment.apiUrl;
+    return this.http.post<Product>(host+"/products/",product);
+  }
 }
