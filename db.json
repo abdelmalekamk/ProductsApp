@@ -39,6 +39,14 @@
       "quantity": 2,
       "selected": false,
       "available": false
+    },
+    {
+      "name": "test",
+      "price": "100",
+      "quantity": "1",
+      "selected": true,
+      "available": true,
+      "id": 7
     }
   ]
 }
