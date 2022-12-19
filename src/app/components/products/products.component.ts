@@ -16,7 +16,8 @@ export class ProductsComponent implements OnInit {
 
   constructor (private productService:ProductsService,private router:Router){}
   ngOnInit(): void {
-    throw new Error('Method not implemented.');
+    //throw new Error('Method not implemented.');
+    this.onGetAllProducts()
   }
 
   onGetAllProducts() {
@@ -73,6 +74,10 @@ export class ProductsComponent implements OnInit {
   }
 
   onAddNewProduct() {
-  this.router.navigateByUrl("/newProduct")
+  this.router.navigateByUrl("/newProduct");
+  }
+
+  onEdit(p: Product) {
+    this.router.navigateByUrl("/editProduct/"+p.id);
   }
 }
