@@ -43,7 +43,7 @@
     {
       "name": "test",
       "price": "100",
-      "quantity": "1",
+      "quantity": "10",
       "selected": true,
       "available": true,
       "id": 7
