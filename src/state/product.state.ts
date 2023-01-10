@@ -15,7 +15,10 @@ export enum ProductActionTypes {
   GET_SELECTED_PRODUCTS ="[Product] Get Selected Products",
   GET_AVAILABLE_PRODUCTS ="[Product] Get Available Products",
   SEARCH_PRODUCTS ="[Product] Search Product",
-  NEW_PRODUCT ="[Product] New Product"
+  NEW_PRODUCT ="[Product] New Product",
+  SELECT_PRODUCT ="[Product] Select Product",
+  EDIT_PRODUCT ="[Product] EDIT Product",
+  DELETE_PRODUCT ="[Product] Delete Product"
 }
 
 export interface ActionEvent {
