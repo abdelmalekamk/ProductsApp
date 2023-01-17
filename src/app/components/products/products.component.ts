@@ -4,6 +4,7 @@ import { ProductsService } from 'src/app/services/products.service';
 import {catchError, map, Observable, of, startWith} from "rxjs";
 import {ActionEvent, AppDataState, DataStateEnum, ProductActionTypes} from "../../../state/product.state";
 import {Router} from "@angular/router";
+import { EventDriverService } from 'src/app/services/event.driver.service';
 
 @Component({
   selector: 'app-products',
@@ -14,10 +15,18 @@ export class ProductsComponent implements OnInit {
   products$: Observable<AppDataState<Product[]>> |null = null ;
   readonly DataStateEnum = DataStateEnum ;
 
-  constructor (private productService:ProductsService,private router:Router){}
+  constructor (
+    private productService:ProductsService,
+    private router:Router,
+    private eventDriverService:EventDriverService){}
+
   ngOnInit(): void {
     //throw new Error('Method not implemented.');
     this.onGetAllProducts()
+    this.eventDriverService.sourceEventSubjectObservable.subscribe((actionEvent:ActionEvent)=>{
+      this.onActionEventProduct(actionEvent);
+    })
+    
   }
 
   onGetAllProducts() {
@@ -61,12 +70,15 @@ export class ProductsComponent implements OnInit {
   }
 
   onSelect(p: Product) {
+    if (p.id == null) return ;
     this.productService
       .select(p)
       .subscribe(data=>{p.selected=data.selected;})
   }
 
   onDelete(p: Product) {
+    if (p.id == null) return ;
+    console.log(p);
     let v =confirm("Are you sure you want to delete this product ?")
     if (v)
     this.productService
@@ -81,21 +93,34 @@ export class ProductsComponent implements OnInit {
     this.router.navigateByUrl("/editProduct/"+p.id);
   }
 
-  onActionEventProductList($event: ActionEvent) {
+  onActionEventProduct($event: ActionEvent) {
     switch($event.type){
       case ProductActionTypes.SELECT_PRODUCT: this.onSelect($event.payload);break;
       case ProductActionTypes.DELETE_PRODUCT: this.onDelete($event.payload);break;
       case ProductActionTypes.EDIT_PRODUCT: this.onEdit($event.payload);break;
+      case ProductActionTypes.GET_ALL_PRODUCTS: this.onGetAllProducts();break;
+      case ProductActionTypes.GET_AVAILABLE_PRODUCTS: this.onGetAvailableProducts();break;
+      case ProductActionTypes.GET_SELECTED_PRODUCTS: this.onGetSelectedProducts();break;
+      case ProductActionTypes.SEARCH_PRODUCTS: this.onSearch($event.payload);break;
+      case ProductActionTypes.NEW_PRODUCT: this.onAddNewProduct();break;
     }
     }
+    
+  // onActionEventProductList($event: ActionEvent) {
+  //   switch($event.type){
+  //     case ProductActionTypes.SELECT_PRODUCT: this.onSelect($event.payload);break;
+  //     case ProductActionTypes.DELETE_PRODUCT: this.onDelete($event.payload);break;
+  //     case ProductActionTypes.EDIT_PRODUCT: this.onEdit($event.payload);break;
+  //   }
+  //   }
   
-    onActionEventNavBar($event: ActionEvent) {
-      switch($event.type){
-        case ProductActionTypes.GET_ALL_PRODUCTS: this.onGetAllProducts();break;
-        case ProductActionTypes.GET_AVAILABLE_PRODUCTS: this.onGetAvailableProducts();break;
-        case ProductActionTypes.GET_SELECTED_PRODUCTS: this.onGetSelectedProducts();break;
-        case ProductActionTypes.SEARCH_PRODUCTS: this.onSearch($event.payload);break;
-        case ProductActionTypes.NEW_PRODUCT: this.onAddNewProduct();break;
-      }
-    }
+  //   onActionEventNavBar($event: ActionEvent) {
+  //     switch($event.type){
+  //       case ProductActionTypes.GET_ALL_PRODUCTS: this.onGetAllProducts();break;
+  //       case ProductActionTypes.GET_AVAILABLE_PRODUCTS: this.onGetAvailableProducts();break;
+  //       case ProductActionTypes.GET_SELECTED_PRODUCTS: this.onGetSelectedProducts();break;
+  //       case ProductActionTypes.SEARCH_PRODUCTS: this.onSearch($event.payload);break;
+  //       case ProductActionTypes.NEW_PRODUCT: this.onAddNewProduct();break;
+  //     }
+  //   }
 }

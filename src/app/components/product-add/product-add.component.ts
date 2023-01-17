@@ -1,5 +1,6 @@
 import {Component, OnInit} from '@angular/core';
 import {FormBuilder, FormGroup, Validator, Validators} from "@angular/forms";
+import { Router } from '@angular/router';
 import {ProductsService} from "../../services/products.service";
 
 @Component({
@@ -11,7 +12,7 @@ export class ProductAddComponent implements OnInit{
   productFormGroup?:FormGroup;
   submitted:boolean=false;
 
-  constructor(private fb:FormBuilder, private productsService:ProductsService) {
+  constructor(private fb:FormBuilder, private productsService:ProductsService, private router: Router) {
   }
 
   ngOnInit(): void {
@@ -28,6 +29,9 @@ export class ProductAddComponent implements OnInit{
     this.submitted=true;
     this.productsService
       .save(this.productFormGroup?.value)
-      .subscribe(data=>{alert("Success")})
+      .subscribe(data=>{
+        alert("Success");
+        this.router.navigateByUrl('/products')
+      })
   }
 }
