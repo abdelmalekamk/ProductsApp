@@ -18,8 +18,7 @@
             <th>Selected</th>
             <th>Available</th>
           </tr>
-          <app-products-item [product]="p" 
-          (eventEmitter)="onActionEvent($event)" 
+          <app-products-item [product]="p"  
           *ngFor="let p of result.data"
           style="display: contents;">
             

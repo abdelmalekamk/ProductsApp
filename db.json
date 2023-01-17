@@ -6,7 +6,7 @@
       "price": 4500,
       "quantity": 100,
       "selected": true,
-      "available": true
+      "available": false
     },
     {
       "id": 2,
@@ -41,12 +41,28 @@
       "available": false
     },
     {
-      "name": "test",
-      "price": "100",
+      "name": "ecouteur",
+      "price": "1.5",
       "quantity": "10",
       "selected": true,
+      "available": false,
+      "id": 8
+    },
+    {
+      "name": "test",
+      "price": 0,
+      "quantity": 0,
+      "selected": true,
       "available": true,
-      "id": 7
+      "id": 9
+    },
+    {
+      "name": "hello ayoub",
+      "price": 0,
+      "quantity": 0,
+      "selected": true,
+      "available": true,
+      "id": 10
     }
   ]
 }
